@@ -1,17 +1,30 @@
 import React, { useEffect } from "react";
 import { useState, ChangeEvent } from "react";
-import characterData from "../assets/characters.json"
 import styles from "./CharacterList.module.scss";
 
+type Character = {
+    name: string;
+    category: string;
+    description: string;
+    significanceIndex: number;
+    avatar: string;
+
+}
+
 export function CharacterList() {
-    const [characters, setCharacters] = useState(characterData);
+    const [characters, setCharacters] = useState<Character[]>([]);
     const [category, setCategory] = useState("");
     const [order, setOrder] = useState("alphabetical");
     
+    useEffect(() => {
+        fetch("/assets/characters.json")
+            .then((response) => response.json())
+            .then((data) => setCharacters(data));
+    }, []);
 
     const handleUpdate = () => {
-        let newCharacterData = characterData.filter(
-            character => {
+        let newCharacterData = characters.filter(
+            (character: Character) => {
                 if(!category) {
                     return true
                 }
@@ -25,9 +38,9 @@ export function CharacterList() {
         )
 
         if (order === "alphabetical") {
-            setCharacters(newCharacterData.sort((a,b) => a.name > b.name ? 1 : -1))
+            setCharacters(newCharacterData.sort((a: Character, b: Character) => a.name > b.name ? 1 : -1))
         } else {
-            setCharacters(newCharacterData.sort((a,b) => a.significanceIndex > b.significanceIndex ? 1 : -1))
+            setCharacters(newCharacterData.sort((a: Character, b: Character) => a.significanceIndex > b.significanceIndex ? 1 : -1))
         }
     }
 
@@ -60,12 +73,12 @@ export function CharacterList() {
             <option value="Significance">Significance</option>
             </select>
             <ul>
-                {characters.map((character) => (
-                    <li className={styles["Character-container"]}>
-                        <p>{character.name}</p>
-                        <p>{character.category}</p>
-                        <p>Significance: {character.significanceIndex}</p>
-                        <p>{character.description}</p>
+                {characters.map((character: Character) => (
+                    <li key={character.name} className={styles["Character-container"]}>
+                        <p className={styles["Character-title"]}>{character.name}</p>
+                        <img src={`assets/characters/${character.avatar}`} className={styles["Character-picture"]}/>
+                        <p className={styles["Character-category"]}>{character.category}</p>
+                        <p className={styles["Character-description"]}>{character.description}</p>
                     </li>
                 ))}
             </ul>
