@@ -84,7 +84,7 @@ export function CharacterList() {
             <ul>
                 {characters.map((character: Character) => (
                     <li key={character.name} className={styles["Character-container"]}>
-                        <p className={styles["Character-title"]}>{character.name}</p>
+                        <p test-dataid={character.name} className={styles["Character-title"]}>{character.name}</p>
                         <img src={`assets/characters/${character.avatar}`} className={styles["Character-picture"]}/>
                         <p className={styles["Character-category"]}>{character.category}</p>
                         <p className={styles["Character-description"]}>{character.description}</p>
