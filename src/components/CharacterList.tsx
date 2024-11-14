@@ -12,18 +12,22 @@ type Character = {
 }
 
 export function CharacterList() {
+    const [allCharacters, setAllCharacters] = useState<Character[]>([]);
     const [characters, setCharacters] = useState<Character[]>([]);
     const [category, setCategory] = useState("");
-    const [order, setOrder] = useState("alphabetical");
+    const [order, setOrder] = useState("significance");
     
     useEffect(() => {
         fetch("/assets/characters.json")
             .then((response) => response.json())
-            .then((data) => setCharacters(data));
+            .then((data) => {
+                setCharacters(data)
+                setAllCharacters(data)
+            });
     }, []);
 
     const handleUpdate = () => {
-        let newCharacterData = characters.filter(
+        let newCharacterData = allCharacters.filter(
             (character: Character) => {
                 if(!category) {
                     return true
@@ -54,7 +58,7 @@ export function CharacterList() {
 
     useEffect(() => {
         handleUpdate();
-    }, [category, order]);
+    }, [category, order, allCharacters]);
 
     if (!characters) {
         return <div>Loading...</div>;
@@ -65,15 +69,15 @@ export function CharacterList() {
             <div className={styles["Filter-container"]}>
                 <label className={styles["Category"]} htmlFor="category-select">Category:</label>
                 <select className={styles["Category"]} name="category" id="category-select" onChange={handleCategoryFilter}>
-                    <option value="">Category</option>
+                    <option value="">All Roles</option>
                     <option value="human">human</option>
                     <option value="wizard">wizard</option>
                     <option value="hobbit">hobbit</option>
                 </select>
                 <label className={styles["Order"]}  htmlFor="order-select">Order:</label>
                 <select className={styles["Order"]}  name="order" id="order-select" onChange={handleOrderFilter}>
-                    <option value="alphabetical">Alphabetical</option>
                     <option value="Significance">Significance</option>
+                    <option value="alphabetical">Alphabetical</option>
                 </select>
             </div>
 
