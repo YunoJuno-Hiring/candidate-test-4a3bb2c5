@@ -1,0 +1,48 @@
+p {
+    margin: 0px;
+    text-align: start;
+}
+
+.Character-container {
+    padding-left: 4px;
+    width: 1000px;
+    background-color: white;
+    align-items: start;
+
+    display: grid;
+    grid-template-columns: [colLine1] 120px [colLine2] auto [colLine3];
+    grid-template-rows: [rowLine1] 25% [rowLine2] 25% [rowLine3] 50% [rowLine4];
+}
+
+.Character-title {
+    grid-column-start: colLine2;
+    grid-column-end: colLine3;
+    grid-row-start: rowLine1;
+    grid-row-end: rowLine2;
+}
+
+.Character-picture {
+    grid-column-start: colLine1;
+    grid-column-end: colLine2;
+    grid-row-start: rowLine1;
+    grid-row-end: rowLine3;
+
+    width: 100px;
+    height: 100px;
+    margin: 10px auto;
+    border-radius: 50%;
+}
+
+.Character-category {
+    grid-column-start: colLine2;
+    grid-column-end: colLine3;
+    grid-row-start: rowLine2;
+    grid-row-end: rowLine3;
+}
+
+.Character-description {
+    grid-column-start: colLine2;
+    grid-column-end: colLine3;
+    grid-row-start: rowLine3;
+    grid-row-end: rowLine4;
+}
