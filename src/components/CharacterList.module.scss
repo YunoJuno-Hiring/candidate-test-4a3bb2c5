@@ -1,13 +1,40 @@
+label {
+    text-align: start;
+    align-self: end;
+    padding: 10px 0 10px 10px;
+    grid-row-start: rowLine1;
+    grid-row-end: rowLine2;
+}
+
+select {
+    height: 30px;
+    width: 150px;
+    margin: 0 0 10px 10px;
+
+    grid-row-start: rowLine2;
+    grid-row-end: rowLine3;
+}
+
 p {
     margin: 0px;
     text-align: start;
+}
+
+.Filter-container {
+    margin: 40px;
+    width: 340px;
+    height: 100px;
+    background-color: white;
+
+    display: grid;
+    grid-template-columns: [colLine1] 50% [colLine2] 50% [colLine3];
+    grid-template-rows: [rowLine1] 50% [rowLine2] 50% [rowLine3];
 }
 
 .Character-container {
     padding-left: 4px;
     width: 1000px;
     background-color: white;
-    align-items: start;
 
     display: grid;
     grid-template-columns: [colLine1] 120px [colLine2] auto [colLine3];

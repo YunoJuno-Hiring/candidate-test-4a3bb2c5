@@ -62,16 +62,21 @@ export function CharacterList() {
       
     return (
         <div>
-            <select name="category" onChange={handleCategoryFilter}>
-            <option value="">Category</option>
-            <option value="human">human</option>
-            <option value="wizard">wizard</option>
-            <option value="hobbit">hobbit</option>
-            </select>
-            <select name="order" onChange={handleOrderFilter}>
-            <option value="alphabetical">Alphabetical</option>
-            <option value="Significance">Significance</option>
-            </select>
+            <div className={styles["Filter-container"]}>
+                <label className={styles["Category"]} htmlFor="category-select">Category:</label>
+                <select className={styles["Category"]} name="category" id="category-select" onChange={handleCategoryFilter}>
+                    <option value="">Category</option>
+                    <option value="human">human</option>
+                    <option value="wizard">wizard</option>
+                    <option value="hobbit">hobbit</option>
+                </select>
+                <label className={styles["Order"]}  htmlFor="order-select">Order:</label>
+                <select className={styles["Order"]}  name="order" id="order-select" onChange={handleOrderFilter}>
+                    <option value="alphabetical">Alphabetical</option>
+                    <option value="Significance">Significance</option>
+                </select>
+            </div>
+
             <ul>
                 {characters.map((character: Character) => (
                     <li key={character.name} className={styles["Character-container"]}>
